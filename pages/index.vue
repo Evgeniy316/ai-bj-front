@@ -1,0 +1,3 @@
+<template>
+  <AppIndexCard />
+</template>
