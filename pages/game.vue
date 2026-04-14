@@ -1,8 +1,19 @@
+<script lang="ts" setup>
+
+
+
+
+</script>
+
+
 <template>
   <div class="game-page">
     <AppGameCard />
   </div>
 </template>
+
+
+
 
 <style scoped>
 .game-page {

@@ -1,8 +1,7 @@
 <script lang="ts" setup>
-const router = useRouter();
-
+const createSession = inject('createSessionKey', ref(false)) 
 function startGame() {
-  router.push('/game');
+  createSession.value = true 
 }
 </script>
 
