@@ -5,7 +5,10 @@ export default defineEventHandler(async (event) => {
     })
     
     await setUserSession(event, {
-      user: { id: response.session_id }
+      user: { 
+        id: response.session_id,
+        started_round: false,
+      }
     })
     
     return response.session_id

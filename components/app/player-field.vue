@@ -1,12 +1,19 @@
 <script lang="ts" setup>
 import { CardValue, CardSuit } from '~/types/card';
+import type { Hand } from '~/types/round-response';
+
+const props = defineProps<{
+  playerHands?: Hand[]
+}>();
 </script>
 
 <template>
   <div class="player-field">
-    <AppHandCard />
-    <!-- <AppHandCard :cards="[{ value: CardValue.ACE, suit: CardSuit.SPADES, faceUp: true }]" /> -->
-    <AppHandCard />
+    <AppHandCard 
+      v-for="(hand, index) in (playerHands || [])" 
+      :key="index"
+      :cards="hand"
+    />
   </div>
 </template>
 

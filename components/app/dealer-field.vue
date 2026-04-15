@@ -1,6 +1,26 @@
+<script lang="ts" setup>
+import type { Card } from '~/types/round-response'
+import { mapApiCardToDisplayCard } from '~/types/card'
+
+const dealerUpcard = inject<Ref<Card | null>>('dealerUpcard', ref(null))
+
+const dealerCards = computed(() => {
+  if (!dealerUpcard.value) return []
+  return [mapApiCardToDisplayCard(dealerUpcard.value, true)]
+})
+</script>
+
 <template>
   <div class="dealer-field">
-    <AppHandCard />
+    <div class="cards-container">
+      <div class="card-wrapper first-card">
+        <AppHandCard v-if="dealerUpcard" :cards="dealerCards" />
+        <AppHandCard v-else />
+      </div>
+      <div class="card-wrapper second-card">
+        <AppHandCard />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -16,5 +36,25 @@
   border-radius: 8px;
   background-color: #f9f9f9;
   box-sizing: border-box;
+}
+
+.cards-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.card-wrapper {
+  position: relative;
+}
+
+.first-card {
+  z-index: 2;
+}
+
+.second-card {
+  position: relative;
+  left: -40px;
+  z-index: 1;
 }
 </style>

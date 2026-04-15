@@ -35,6 +35,7 @@ const getSuitColor = (suit: CardSuit) => {
   border-radius: 12px;
   width: 80px;
   height: 120px;
+  padding: 16px;
   box-sizing: border-box;
 }
 

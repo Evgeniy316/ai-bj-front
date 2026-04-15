@@ -1,6 +1,7 @@
 declare module '#auth-utils' {
   export interface User {
     id: string
+    started_round: boolean
   }
 
   export function useUserSession(): {
