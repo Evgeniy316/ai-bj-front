@@ -13,17 +13,15 @@ provide('createSessionKey', createSession);
 watch(createSession, async (newVal) => {
   if (newVal) {
     try {
-      let id = await $fetch<string>(FrontPaths.GAME, {
-        method: "POST"
+      await $fetch(`${FrontPaths.API}${FrontPaths.GAME}`, {
+        method: "POST",
       })
-      console.log(id)
-      const { fetch } = useUserSession()
-      await fetch()
+      
+      router.push(FrontPaths.GAME)
     } catch (error) {
       console.error('Failed to fetch balance:', error)
     }
-
-    router.push(FrontPaths.GAME)
+    
   }
 })
 
