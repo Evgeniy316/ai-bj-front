@@ -2,10 +2,24 @@
 import type { Card } from '~/types/round-response'
 import { mapApiCardToDisplayCard } from '~/types/card'
 
-const dealerUpcard = inject<Ref<Card | null>>('dealerUpcard', ref(null))
+const { user, session, loggedIn, clear, fetch} = useUserSession()
+// console.log("After fetch in dealerCards")
 
+
+// const dealerUpcard = inject<Ref<Card | null>>('dealerUpcard', ref(null))
+// const dealerUpcard = user.value?.dealerUpcard
+const dealerUpcard = computed(() => user.value?.dealerUpcard ?? null)
+// console.log(user)
+// console.log("dealerUpcard")
+onMounted(async() =>{
+  await fetch()
+  console.log(user.value?.dealerUpcard)
+  console.log("on dealer field onmounred")
+})
 const dealerCards = computed(() => {
-  if (!dealerUpcard.value) return []
+  // fetch()
+  // console.log("After fetch in dealerCards")
+  if (!dealerUpcard) return []
   return [mapApiCardToDisplayCard(dealerUpcard.value, true)]
 })
 </script>

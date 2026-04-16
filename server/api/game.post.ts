@@ -8,6 +8,7 @@ export default defineEventHandler(async (event) => {
       user: { 
         id: response.session_id,
         started_round: false,
+        dealerUpcard: null,
       }
     })
     

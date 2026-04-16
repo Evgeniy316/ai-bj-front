@@ -1,18 +1,21 @@
+import type { Card } from "./types/round-response"
+
 declare module '#auth-utils' {
   export interface User {
     id: string
-    started_round: boolean
+    started_round: boolean,
+    dealerUpcard: Card?
   }
 
-  export function useUserSession(): {
-    user: Ref<User | null>
-    session: any
-    loggedIn: Ref<boolean>
-    fetch: () => Promise<void>
-    clear: () => Promise<void>
-  }
+  // export function useUserSession(): {
+  //   user: Ref<User | null>
+  //   session: any
+  //   loggedIn: Ref<boolean>
+  //   fetch: () => Promise<void>
+  //   clear: () => Promise<void>
+  // }
    interface UserSession {
-    user: User
+    user: User | null
   }
   export function getUserSession(event: H3Event): Promise<UserSession>
 }

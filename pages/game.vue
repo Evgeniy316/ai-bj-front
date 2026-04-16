@@ -4,7 +4,6 @@ import type { Hand, Card, ActionType } from '~/types/round-response'
 
 const { user, session, loggedIn, clear, fetch} = useUserSession()
 
-const get_new_round = ref(true)
 
 const playerHand = ref<Hand | null>(null)
 const dealerUpcard = ref<Card | null>(null)
@@ -17,14 +16,17 @@ provide('validActions', validActions)
 provide('suggestion', suggestion)
 
 onMounted(async() =>{
+  // await nextTick()
   await fetch() 
+  // console.log(user.value.dealerUpcard)
+  // console.log("user.value.dealerUpcard")
+  // if(user.value?.dealerUpcard) {
+  //   dealerUpcard.value = user.value.dealerUpcard
+  // }
   if(loggedIn.value){
-      if(!user.value.started_round){
+      if(user.value && !user.value.started_round){
         try {
-          console.log(user.value.started_round)
-          console.log("user.value.started_round")
           const response = await $fetch<{
-          round_over: boolean
           player_hand: Hand
           dealer_upcard: Card
           valid_actions: ActionType[]
@@ -35,24 +37,26 @@ onMounted(async() =>{
             session_id: user.value.id
           }
         })
-        console.log("Setting")
+        // nextTick()
+        await fetch() 
+        console.log(user.value.dealerUpcard)
+        console.log("user.value.dealerUpcard")
+        console.log(user.value.started_round)
+        console.log("Did we start the round")
+
         if (response) {
           playerHand.value = response.player_hand
           dealerUpcard.value = response.dealer_upcard
           validActions.value = response.valid_actions
           suggestion.value = response.suggestion
-          console.log('dealerUpcard:', dealerUpcard.value)
-          get_new_round.value = response.round_over
-          console.log()
-        }
-        
+        }  
+        console.log("Checking ")
+        console.log(dealerUpcard.value)
       } catch (error) {
         console.error('Some kind of error:', error)
       }
     }
   }
-                
-
 })
 </script>
 
