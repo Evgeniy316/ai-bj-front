@@ -1,16 +1,24 @@
 <script lang="ts" setup>
-import { CardValue, CardSuit } from '~/types/card';
 import type { Hand } from '~/types/round-response';
+import { mapApiCardsToDisplayCards } from '~/types/card';
 
-const props = defineProps<{
-  playerHands?: Hand[]
-}>();
+const { user, fetch } = useUserSession();
+const playerHands = computed(() => user.value?.player_hands ?? []);
+
+onMounted(async () => {
+  await fetch();
+});
+
+const displayHands = computed(() => {
+  if (!playerHands.value || playerHands.value.length === 0) return [];
+  return playerHands.value.map((hand: Hand) => mapApiCardsToDisplayCards(hand, true));
+});
 </script>
 
 <template>
   <div class="player-field">
     <AppHandCard 
-      v-for="(hand, index) in (playerHands || [])" 
+      v-for="(hand, index) in displayHands" 
       :key="index"
       :cards="hand"
     />

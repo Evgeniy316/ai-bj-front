@@ -4,7 +4,8 @@ declare module '#auth-utils' {
   export interface User {
     id: string
     started_round: boolean,
-    dealerUpcard: Card?
+    dealerUpcard: Card?,
+    player_hands: Hand[],
   }
 
   // export function useUserSession(): {
