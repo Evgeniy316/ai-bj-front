@@ -6,6 +6,8 @@ declare module '#auth-utils' {
     started_round: boolean,
     dealerUpcard: Card?,
     player_hands: Hand[],
+    valid_actions: ActionType[],
+    dealer_hand: Hand[],
   }
 
   // export function useUserSession(): {

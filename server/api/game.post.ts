@@ -1,14 +1,17 @@
+import {Hand} from "~/types/round-response"
+
 export default defineEventHandler(async (event) => {
   try {
     const response = await $fetch<{ session_id: string }>(`http://localhost:8000/session`, {
       method: 'POST'
     })
-    
+    // await clearUserSession(event)
     await setUserSession(event, {
       user: { 
         id: response.session_id,
         started_round: false,
         dealerUpcard: null,
+        player_hands: null,
       }
     })
     

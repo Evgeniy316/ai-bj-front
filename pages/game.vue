@@ -15,6 +15,34 @@ provide('dealerUpcard', dealerUpcard)
 provide('validActions', validActions)
 provide('suggestion', suggestion)
 
+
+const currentAction = ref<ActionType | null>(null)
+provide('currentAction', currentAction)
+
+watch(currentAction, async (action) => {
+  if (!action || !loggedIn) return // Ignore null/initial value
+  
+  try {
+    const response = await $fetch('/api/round/action', {
+      method: 'POST',
+      body: {
+        session_id: user.value.id,
+        action: action
+      }
+    })
+    
+    // Handle response, update game state, etc.
+    console.log('Action response:', response)
+    await fetch()
+    // Reset to null so the same action can be triggered again
+    currentAction.value = null
+    
+  } catch (error) {
+    console.error('Action failed:', error)
+    currentAction.value = null
+  }
+})
+
 onMounted(async() =>{
   // await nextTick()
   await fetch() 

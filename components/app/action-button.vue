@@ -1,11 +1,24 @@
 <script lang="ts" setup>
-defineProps<{
+import type { ActionType } from '~/types/round-response';
+
+const props = defineProps<{
   label: string;
+  disabled?: boolean;
+  action: ActionType;
 }>();
+
+const currentAction = inject<Ref<ActionType | null>>('currentAction')
+
+const handleClick = () => {
+  if (currentAction) {
+    currentAction.value = props.action
+  }
+}
+
 </script>
 
 <template>
-  <button class="action-button">
+  <button class="action-button" :disabled="disabled" @click="handleClick">
     {{ label }}
   </button>
 </template>

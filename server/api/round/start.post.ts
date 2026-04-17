@@ -13,6 +13,10 @@ export default defineEventHandler(async (event) => {
     console.log(response)
     console.log(response.round.player_hands)
 
+    session.user.player_hands = null
+    session.user.dealer_upcard = null
+    session.user.valid_actions = null
+    session.user.dealer_hand = null
 
     const user = <User>session.user
     await setUserSession(event, {
@@ -21,7 +25,8 @@ export default defineEventHandler(async (event) => {
         ...session.user,
         started_round: true,
         dealerUpcard: response.round.dealer_upcard,
-        player_hands: response.round.player_hands
+        player_hands: response.round.player_hands,
+        valid_actions: response.round.valid_actions,
       },
     })
     return {

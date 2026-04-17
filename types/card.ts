@@ -51,19 +51,34 @@ export const mapSuitToCardSuit = (suit: string): CardSuit => {
     'hearts': CardSuit.HEARTS,
     'diamonds': CardSuit.DIAMONDS,
     'clubs': CardSuit.CLUBS,
-    'spades': CardSuit.SPADES
+    'spades': CardSuit.SPADES,
+    '♥': CardSuit.HEARTS,
+    '♦': CardSuit.DIAMONDS,
+    '♣': CardSuit.CLUBS,
+    '♠': CardSuit.SPADES
   }
-  return mapping[suit.toLowerCase()] || CardSuit.SPADES
+  return mapping[suit.toLowerCase()] || mapping[suit] || CardSuit.SPADES
 }
 
-export const mapApiCardToDisplayCard = (card: { rank: number; suit: string }, faceUp: boolean = true): DisplayCard => {
+// export const mapApiCardToDisplayCard = (card: { rank: number; suit: string }, faceUp: boolean = true): DisplayCard => {
+//   return {
+//     value: mapRankToValue(card.rank),
+//     suit: mapSuitToCardSuit(card.suit),
+//     faceUp
+//   }
+// }
+export const mapApiCardToDisplayCard = (card: { rank: number; display_rank: number; suit: string }, faceUp: boolean = true): DisplayCard => {
   return {
-    value: mapRankToValue(card.rank),
+    value: mapRankToValue(card.display_rank),  // USE display_rank instead of rank
     suit: mapSuitToCardSuit(card.suit),
     faceUp
   }
 }
 
-export const mapApiCardsToDisplayCards = (cards: Array<{ rank: number; suit: string }>, faceUp: boolean = true): DisplayCard[] => {
+// export const mapApiCardsToDisplayCards = (cards: Array<{ rank: number; suit: string }>, faceUp: boolean = true): DisplayCard[] => {
+//   return cards.map(card => mapApiCardToDisplayCard(card, faceUp))
+// }
+
+export const mapApiCardsToDisplayCards = (cards: Array<{ rank: number; display_rank: number; suit: string }>, faceUp: boolean = true): DisplayCard[] => {
   return cards.map(card => mapApiCardToDisplayCard(card, faceUp))
 }

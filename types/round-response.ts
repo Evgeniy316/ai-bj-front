@@ -1,6 +1,7 @@
 export interface Card {
-  rank: number
-  suit: string
+  rank: number,
+  display_rank: number,
+  suit: string,
 }
 
 export interface Hand extends Array<Card> {}
