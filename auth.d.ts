@@ -8,6 +8,8 @@ declare module '#auth-utils' {
     player_hands: Hand[],
     valid_actions: ActionType[],
     dealer_hand: Hand[],
+    round_over: boolean,
+    results: RoundResult[] | null
   }
 
   // export function useUserSession(): {

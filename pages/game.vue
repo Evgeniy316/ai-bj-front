@@ -19,8 +19,59 @@ provide('suggestion', suggestion)
 const currentAction = ref<ActionType | null>(null)
 provide('currentAction', currentAction)
 
+const showRoundOverModal = ref(false)
+
+watch(() => user.value?.round_over, (isRoundOver) => {
+  if (isRoundOver) {
+    showRoundOverModal.value = true
+  }
+})
+
+const handleContinue = async () => {
+  if(loggedIn.value && user.value){
+    user.player_hands = null
+    user.dealer_upcard = null
+    user.valid_actions = null
+    user.dealer_hand = null
+    user.value.started_round = false
+    user.value.round_over = false
+    await fetch()
+    try {
+            const response = await $fetch<{
+            player_hand: Hand
+            dealer_upcard: Card
+            valid_actions: ActionType[]
+            suggestion: string | null
+          }>(`${FrontPaths.API}${FrontPaths.ROUND_START}`, {
+            method: "POST",
+            body: {
+              session_id: user.value.id
+            }
+          })
+          // nextTick()
+          await fetch() 
+          console.log(user.value.dealerUpcard)
+          console.log("user.value.dealerUpcard")
+          console.log(user.value.started_round)
+          console.log("Did we start the round")
+
+          if (response) {
+            playerHand.value = response.player_hand
+            dealerUpcard.value = response.dealer_upcard
+            validActions.value = response.valid_actions
+            suggestion.value = response.suggestion
+          }  
+          console.log("Checking ")
+          console.log(dealerUpcard.value)
+        } catch (error) {
+          console.error('Some kind of error:', error)
+        }
+    showRoundOverModal.value = false
+  }
+}
+
 watch(currentAction, async (action) => {
-  if (!action || !loggedIn) return // Ignore null/initial value
+  if (!action || !loggedIn ||!user.value) return // Ignore null/initial value
   
   try {
     const response = await $fetch('/api/round/action', {
@@ -36,6 +87,9 @@ watch(currentAction, async (action) => {
     await fetch()
     // Reset to null so the same action can be triggered again
     currentAction.value = null
+    if(response){
+      
+    }
     
   } catch (error) {
     console.error('Action failed:', error)
@@ -92,6 +146,11 @@ onMounted(async() =>{
 <template>
   <div class="game-page">
     <AppGameCard />
+    <AppRoundOverModal 
+      :show="showRoundOverModal" 
+      @close="showRoundOverModal = false"
+      @continue="handleContinue"
+    />
   </div>
 </template>
 

@@ -27,6 +27,8 @@ export default defineEventHandler(async (event) => {
         dealerUpcard: response.round.dealer_upcard,
         player_hands: response.round.player_hands,
         valid_actions: response.round.valid_actions,
+        round_over: false,
+        results: response.round.results
       },
     })
     return {

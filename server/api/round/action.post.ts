@@ -28,12 +28,21 @@ export default defineEventHandler(async (event) => {
         player_hands: response.round.player_hands,
         valid_actions: response.round.valid_actions,
         dealer_hand: response.round.dealer_hand,
+        round_over: response.round.round_over,
+        results: response.round.results,
 
         },
     })
     const updatedSession = await getUserSession(event)
     const user = <User>updatedSession.user
-    
+    if(response.round.results){
+      return {
+        results: response.round.results
+      }
+    }
+    else return{
+       results: null
+    }
     // console.log(`session.user : \n ${user.valid_actions}`)
 
 
