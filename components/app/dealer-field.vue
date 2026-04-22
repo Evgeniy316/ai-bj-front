@@ -7,11 +7,21 @@ const { user, session, loggedIn, clear, fetch} = useUserSession()
 const dealerUpcard = computed(() => user.value?.dealerUpcard ?? null)
 const dealerHand = computed(() => user.value?.dealer_hand ?? null)
 
-
+const showRoundOverModal = ref()
 
 onMounted(async() =>{
   await fetch()
 
+})
+const dealer_info = {
+  total: 'unknown'
+}
+
+
+watch(() => user.value, (isRoundOver) => {
+  if (isRoundOver) {
+    showRoundOverModal.value = true
+  }
 })
 // const dealerCards = computed(() => {
 
@@ -45,23 +55,7 @@ const showFaceDownCard = computed(() => {
 
 <template>
   <div class="dealer-field">
-    <div class="cards-container">
-      <!-- Render all dealer cards dynamically -->
-      <div 
-        v-for="(card, index) in dealerCards" 
-        :key="index"
-        class="card-wrapper"
-        
-      >
-      <!-- :style="{ left: index > 0 ? `-${40 * index}px` : '0', zIndex: dealerCards.length - index }"?> -->
-        <AppHandCard :cards="[card]" />
-      </div>
-      
-      <!-- Fallback when no cards at all -->
-      <div v-if="dealerCards.length === 0" class="card-wrapper">
-        <AppHandCard />
-      </div>
-    </div>
+    <AppHandCard :cards="dealerCards" :hand-info="dealer_info" />
   </div>
 </template>
 
@@ -77,25 +71,5 @@ const showFaceDownCard = computed(() => {
   border-radius: 8px;
   background-color: #f9f9f9;
   box-sizing: border-box;
-}
-
-.cards-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.card-wrapper {
-  position: relative;
-}
-
-.first-card {
-  z-index: 2;
-}
-
-.second-card {
-  position: relative;
-  left: -20px;
-  z-index: 1;
 }
 </style>

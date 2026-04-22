@@ -1,6 +1,7 @@
 <template>
   <div class="game-panel">
     <AppActionButtons />
+    <AppSuggestionsCard />
   </div>
 </template>
 

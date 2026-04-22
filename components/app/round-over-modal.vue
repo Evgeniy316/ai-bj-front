@@ -10,7 +10,7 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <div v-if="show" class="modal-overlay" @click.self="emit('close')">
+  <div v-if="show" class="modal-overlay">
     <div class="modal-content">
       <h2>Round Over</h2>
       <button class="action-button" @click="emit('continue')">
@@ -27,7 +27,7 @@ const emit = defineEmits<{
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.0);
   display: flex;
   justify-content: center;
   align-items: center;

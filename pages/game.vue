@@ -41,7 +41,7 @@ const handleContinue = async () => {
             player_hand: Hand
             dealer_upcard: Card
             valid_actions: ActionType[]
-            suggestion: string | null
+            suggestion: string,
           }>(`${FrontPaths.API}${FrontPaths.ROUND_START}`, {
             method: "POST",
             body: {
@@ -112,7 +112,7 @@ onMounted(async() =>{
           player_hand: Hand
           dealer_upcard: Card
           valid_actions: ActionType[]
-          suggestion: string | null
+          suggestion: string 
         }>(`${FrontPaths.API}${FrontPaths.ROUND_START}`, {
           method: "POST",
           body: {

@@ -9,7 +9,10 @@ declare module '#auth-utils' {
     valid_actions: ActionType[],
     dealer_hand: Hand[],
     round_over: boolean,
-    results: RoundResult[] | null
+    results: RoundResult[] | null,
+    suggestion: string,
+    player_totals: number[],
+    current_hand_idx: number | null
   }
 
   // export function useUserSession(): {

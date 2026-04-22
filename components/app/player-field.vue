@@ -4,6 +4,8 @@ import { mapApiCardsToDisplayCards } from '~/types/card';
 
 const { user, fetch } = useUserSession();
 const playerHands = computed(() => user.value?.player_hands ?? []);
+const playerTotals = computed(() => user.value?.player_totals ?? []);
+const currentHandIdx = computed(() => user.value?.current_hand_idx ?? null);
 
 onMounted(async () => {
   await fetch();
@@ -13,6 +15,21 @@ const displayHands = computed(() => {
   if (!playerHands.value || playerHands.value.length === 0) return [];
   return playerHands.value.map((hand: Hand) => mapApiCardsToDisplayCards(hand, true));
 });
+
+// Create hand info for each hand with its total
+const getHandInfo = (index: number) => {
+  const total = playerTotals.value[index];
+  if (total === undefined) return undefined;
+  
+  return {
+    'Total': total
+  };
+};
+
+// Check if this hand is the active one
+const isActiveHand = (index: number) => {
+  return currentHandIdx.value === index;
+};
 </script>
 
 <template>
@@ -21,6 +38,8 @@ const displayHands = computed(() => {
       v-for="(hand, index) in displayHands" 
       :key="index"
       :cards="hand"
+      :handInfo="getHandInfo(index)"
+      :isActive="isActiveHand(index)"
     />
   </div>
 </template>
