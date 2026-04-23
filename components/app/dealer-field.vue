@@ -13,10 +13,16 @@ onMounted(async() =>{
   await fetch()
 
 })
-const dealer_info = {
-  total: 'unknown'
-}
+const dealer_info = ref()
 
+watch (() => user.value?.dealer_total, (newTotal) =>{
+  if(newTotal){
+    dealer_info.value = { Total: newTotal }
+  }
+  else{
+    dealer_info.value = {Total : 0}
+  }
+})
 
 watch(() => user.value, (isRoundOver) => {
   if (isRoundOver) {

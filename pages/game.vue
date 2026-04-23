@@ -160,7 +160,8 @@ onMounted(async() =>{
 <style scoped>
 .game-page {
   width: 100%;
-  height: 100vh;
+  /* height: 100vh; */
+  height: 100%;
   margin: 0;
   padding: 0;
   box-sizing: border-box;

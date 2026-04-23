@@ -13,8 +13,9 @@
   border: 3px solid purple;
   border-radius: 12px;
   padding: 16px;
-  width: 80px;
+  width: 85px;
   height: 120px;
+  box-sizing: border-box;
 }
 
 .card-card img {

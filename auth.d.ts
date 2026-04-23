@@ -1,4 +1,3 @@
-import type { Card } from "./types/round-response"
 
 declare module '#auth-utils' {
   export interface User {
@@ -12,7 +11,9 @@ declare module '#auth-utils' {
     results: RoundResult[] | null,
     suggestion: string,
     player_totals: number[],
-    current_hand_idx: number | null
+    current_hand_idx: number | null,
+    dealer_total: number | null,
+    results: RoundResult[] | null
   }
 
   // export function useUserSession(): {

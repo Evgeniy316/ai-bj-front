@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import type { RoundResult } from '~/types/round-response'
+
 const props = defineProps<{
   show: boolean
 }>()
@@ -7,12 +9,43 @@ const emit = defineEmits<{
   close: []
   continue: []
 }>()
+
+const { user } = useUserSession()
+
+const isInitial = ref(false)
+const results = ref<RoundResult[] | null>(null)
+
+watch(() => props.show, (newVal) => {
+  if (newVal) {
+    isInitial.value = true
+    setTimeout(() => {
+      isInitial.value = false
+    }, 1900)
+  }
+})
+
+watch(() => user.value?.results, (newResults) => {
+  if (newResults) {
+    results.value = newResults
+  }
+})
+
+const displayResults = computed(() => {
+  if (!results.value || results.value.length === 0) return ''
+  
+  if (results.value.length === 1) {
+    return `Result: ${results.value[0]}`
+  }
+  
+  return `Results: ${results.value.join(' | ')}`
+})
 </script>
 
 <template>
   <div v-if="show" class="modal-overlay">
-    <div class="modal-content">
+    <div class="modal-content" :class="{ 'initial': isInitial }">
       <h2>Round Over</h2>
+      <p v-if="displayResults" class="results-text">{{ displayResults }}</p>
       <button class="action-button" @click="emit('continue')">
         Continue
       </button>
@@ -41,11 +74,29 @@ const emit = defineEmits<{
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
   min-width: 300px;
+  opacity: 0.3;
+  transition: opacity 0.3s ease;
+}
+
+.modal-content.initial {
+  opacity: 1;
+}
+
+.modal-content:hover {
+  opacity: 1;
 }
 
 .modal-content h2 {
   margin-bottom: 1.5rem;
   color: #333;
+}
+
+.results-text {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #4CAF50;
+  margin-bottom: 1.5rem;
+  text-transform: capitalize;
 }
 
 .action-button {

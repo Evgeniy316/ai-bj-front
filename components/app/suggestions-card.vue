@@ -15,9 +15,9 @@ onMounted(async () => {
 
 <template>
   <div class="suggestions-card">
-    <div v-if="suggestion" class="suggestion-content">
+    <div class="suggestion-content">
       <span class="suggestion-label">Suggestion:</span>
-      <span class="suggestion-text">{{ suggestion }}</span>
+      <span v-if="suggestion" class="suggestion-text">{{ suggestion }}</span>
     </div>
   </div>
 </template>
