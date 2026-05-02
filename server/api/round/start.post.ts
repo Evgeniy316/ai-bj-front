@@ -1,11 +1,13 @@
 import {Hand, RoundState, Card, ActionType, StartRoundResponse} from "~/types/round-response"
 import {User} from "~/types/user_session"
+import {ADDRES} from "~/utils/constants/backEndRoutes"
+
 
 export default defineEventHandler(async (event) => {
   try {
     const body = await readBody(event)
 
-    const response = await $fetch<StartRoundResponse>(`http://localhost:8000/round/start`, {
+    const response = await $fetch<StartRoundResponse>(`http://${ADDRES}/round/start`, {
       method: 'POST',
       body: body
     })

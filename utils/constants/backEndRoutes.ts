@@ -9,3 +9,4 @@ export type RoutePath = typeof RoutePaths[keyof typeof RoutePaths];
 
 
 
+export const ADDRES = "81.26.181.219"

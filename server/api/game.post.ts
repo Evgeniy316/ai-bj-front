@@ -1,8 +1,10 @@
 import {Hand} from "~/types/round-response"
+import {ADDRES} from "~/utils/constants/backEndRoutes"
+
 
 export default defineEventHandler(async (event) => {
   try {
-    const response = await $fetch<{ session_id: string }>(`http://localhost:8000/session`, {
+    const response = await $fetch<{ session_id: string }>(`http://${ADDRES}/session`, {
       method: 'POST'
     })
     // await clearUserSession(event)
