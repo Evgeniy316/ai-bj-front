@@ -16,7 +16,7 @@ onMounted(async () => {
       :key="index"
       class="hand-total"
     >
-      <span class="hand-label">Hand {{ index + 1 }}:</span>
+      <!-- <span class="hand-label">Hand {{ index + 1 }}:</span> -->
       <span class="hand-value">{{ total }}</span>
     </div>
   </div>

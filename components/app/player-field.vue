@@ -16,7 +16,6 @@ const displayHands = computed(() => {
   return playerHands.value.map((hand: Hand) => mapApiCardsToDisplayCards(hand, true));
 });
 
-// Create hand info for each hand with its total
 const getHandInfo = (index: number) => {
   const total = playerTotals.value[index];
   if (total === undefined) return undefined;
@@ -34,13 +33,18 @@ const isActiveHand = (index: number) => {
 
 <template>
   <div class="player-field">
-    <AppHandCard 
-      v-for="(hand, index) in displayHands" 
-      :key="index"
-      :cards="hand"
-      :handInfo="getHandInfo(index)"
-      :isActive="isActiveHand(index)"
-    />
+    <div class="left-section">
+      <AppHandCard 
+        v-for="(hand, index) in displayHands" 
+        :key="index"
+        :cards="hand"
+        :handInfo="getHandInfo(index)"
+        :isActive="isActiveHand(index)"
+      />
+    </div>
+    <div class="right-section">
+      <AppActionButtons />
+    </div>
   </div>
 </template>
 
@@ -49,13 +53,26 @@ const isActiveHand = (index: number) => {
   flex: 1;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-end;
+  gap: 16px;
   padding: 16px;
   border: 2px solid #444;
   border-radius: 8px;
   background-color: #f9f9f9;
   box-sizing: border-box;
+}
+
+.left-section {
+  flex: 2;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.right-section {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
 }
 
 .hand-card {

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { UI_TRANSLATIONS, ACTION_TRANSLATIONS } from '~/utils/constants/translations'
+
 const { user, fetch } = useUserSession()
 
 const suggestion = ref<string | null>(null)
@@ -8,6 +10,12 @@ watch(() => user.value?.suggestion, (newSuggestion) => {
   suggestion.value = newSuggestion ?? null
 }, { immediate: true })
 
+const translateSuggestion = (suggestion: string | null): string => {
+  if (!suggestion) return ''
+  const upperSuggestion = suggestion.toUpperCase()
+  return ACTION_TRANSLATIONS[upperSuggestion as keyof typeof ACTION_TRANSLATIONS] || suggestion
+}
+
 onMounted(async () => {
   await fetch()
 })
@@ -16,8 +24,8 @@ onMounted(async () => {
 <template>
   <div class="suggestions-card">
     <div class="suggestion-content">
-      <span class="suggestion-label">Suggestion:</span>
-      <span v-if="suggestion" class="suggestion-text">{{ suggestion }}</span>
+      <span class="suggestion-label">{{ UI_TRANSLATIONS.SUGGESTION }}</span>
+      <span v-if="suggestion" class="suggestion-text">{{ translateSuggestion(suggestion) }}</span>
     </div>
   </div>
 </template>

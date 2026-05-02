@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { ActionType } from '~/types/round-response'
+import { ACTION_TRANSLATIONS } from '~/utils/constants/translations'
 
 const { user } = useUserSession()
 
@@ -12,21 +13,25 @@ const isActionDisabled = (action: ActionType) => {
 
 <template>
   <div class="action-buttons">
-    <AppActionButton label="Hit" action="hit" :disabled="isActionDisabled('hit')" />
-    <AppActionButton label="Stand" action="stand" :disabled="isActionDisabled('stand')" />
-    <AppActionButton label="Double" action="double" :disabled="isActionDisabled('double')" />
-    <AppActionButton label="Split" action="split" :disabled="isActionDisabled('split')" />
+    <AppActionButton :label="ACTION_TRANSLATIONS.HIT" action="hit" :disabled="isActionDisabled('hit')" />
+    <AppActionButton :label="ACTION_TRANSLATIONS.STAND" action="stand" :disabled="isActionDisabled('stand')" />
+    <AppActionButton :label="ACTION_TRANSLATIONS.DOUBLE" action="double" :disabled="isActionDisabled('double')" />
+    <AppActionButton :label="ACTION_TRANSLATIONS.SPLIT" action="split" :disabled="isActionDisabled('split')" />
   </div>
 </template>
 
 <style scoped>
 .action-buttons {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   gap: 12px;
   padding: 12px;
   border: 2px solid #555;
   border-radius: 8px;
   background-color: #f5f5f5;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
 }
 </style>

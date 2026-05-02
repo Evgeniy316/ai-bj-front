@@ -13,8 +13,10 @@ defineProps<{
     <div class="cards-section">
       <template v-if="cards && cards.length > 0">
         <template v-for="(card, index) in cards" :key="index">
-          <AppCardFaceUp v-if="card.faceUp" :value="card.value" :suit="card.suit" />
-          <AppCardFaceDown v-else />
+          <div class="card">
+            <AppCardFaceUp v-if="card.faceUp" :value="card.value" :suit="card.suit" />
+            <AppCardFaceDown v-else />
+          </div>
         </template>
       </template>
       <AppCardFaceDown v-else />
@@ -39,10 +41,17 @@ defineProps<{
   border-radius: 8px;
   background-color: #f0f8f0;
 }
+.card{
+  flex-shrink: 0;
+}
+.card + .card{
+  margin-left: -50px;
+  z-index: 1;
+}
 
 .cards-section {
   display: flex;
   flex-direction: row;
-  gap: 8px;
+  /* gap: 8px; */
 }
 </style>

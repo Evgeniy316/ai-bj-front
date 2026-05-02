@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { RoundResult } from '~/types/round-response'
+import { GameResultTranslation, UI_TRANSLATIONS } from '~/utils/constants/translations'
 
 const props = defineProps<{
   show: boolean
@@ -13,10 +14,12 @@ const emit = defineEmits<{
 const { user } = useUserSession()
 
 const isInitial = ref(false)
+const isSlideOut = ref(false)
 const results = ref<RoundResult[] | null>(null)
 
 watch(() => props.show, (newVal) => {
   if (newVal) {
+    isSlideOut.value = false
     isInitial.value = true
     setTimeout(() => {
       isInitial.value = false
@@ -30,24 +33,37 @@ watch(() => user.value?.results, (newResults) => {
   }
 })
 
+const translateResult = (result: string): string => {
+  const upperResult = result.toUpperCase()
+  return GameResultTranslation[upperResult as keyof typeof GameResultTranslation] || result
+}
+
 const displayResults = computed(() => {
   if (!results.value || results.value.length === 0) return ''
   
   if (results.value.length === 1) {
-    return `Result: ${results.value[0]}`
+    return `${UI_TRANSLATIONS.RESULT}: ${translateResult(results.value[0] ?? '')}`
   }
   
-  return `Results: ${results.value.join(' | ')}`
+  const translatedResults = results.value.map(r => translateResult(r)).join(' | ')
+  return `${UI_TRANSLATIONS.RESULTS}: ${translatedResults}`
 })
+
+const handleContinue = () => {
+  isSlideOut.value = true
+  setTimeout(() => {
+    emit('continue')
+  }, 400)
+}
 </script>
 
 <template>
   <div v-if="show" class="modal-overlay">
-    <div class="modal-content" :class="{ 'initial': isInitial }">
-      <h2>Round Over</h2>
+    <div class="modal-content" :class="{ 'initial': isInitial, 'slide-out': isSlideOut }">
+      <h2>{{ UI_TRANSLATIONS.ROUND_OVER }}</h2>
       <p v-if="displayResults" class="results-text">{{ displayResults }}</p>
-      <button class="action-button" @click="emit('continue')">
-        Continue
+      <button class="action-button" @click="handleContinue">
+        {{ UI_TRANSLATIONS.CONTINUE }}
       </button>
     </div>
   </div>
@@ -62,28 +78,43 @@ const displayResults = computed(() => {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.0);
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-end;
+  align-items: stretch;
   z-index: 1000;
+  pointer-events: none;
 }
 
 .modal-content {
   background: white;
   padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: -4px 0 6px rgba(0, 0, 0, 0.1);
   text-align: center;
-  min-width: 300px;
-  opacity: 0.3;
-  transition: opacity 0.3s ease;
+  width: 33.333%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.4s ease;
+  transform: translateX(100%);
+  animation: slideIn 0.4s ease forwards;
+  pointer-events: auto;
 }
 
-.modal-content.initial {
-  opacity: 1;
+@keyframes slideIn {
+  to {
+    transform: translateX(0);
+  }
 }
 
-.modal-content:hover {
-  opacity: 1;
+.modal-content.slide-out {
+  animation: slideOut 0.4s ease forwards;
+}
+
+@keyframes slideOut {
+  to {
+    transform: translateX(100%);
+  }
 }
 
 .modal-content h2 {
