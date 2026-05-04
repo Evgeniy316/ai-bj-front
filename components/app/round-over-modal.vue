@@ -144,4 +144,37 @@ const handleContinue = () => {
 .action-button:hover {
   background-color: #45a049;
 }
+
+@media (max-width: 768px) {
+  .modal-overlay {
+    justify-content: center;
+    align-items: flex-end;
+  }
+
+  .modal-content {
+    width: 100%;
+    height: auto;
+    max-height: 50%;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+    transform: translateY(100%);
+    animation: slideInBottom 0.4s ease forwards;
+  }
+
+  @keyframes slideInBottom {
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  .modal-content.slide-out {
+    animation: slideOutBottom 0.4s ease forwards;
+  }
+
+  @keyframes slideOutBottom {
+    to {
+      transform: translateY(100%);
+    }
+  }
+}
+
 </style>

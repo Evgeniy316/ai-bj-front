@@ -9,4 +9,6 @@ export type RoutePath = typeof RoutePaths[keyof typeof RoutePaths];
 
 
 
-export const ADDRES = "81.26.181.219"
+// export const ADDRES = "81.26.181.219"
+export const ADDRES = "localhost:8000"
+// export const ADDRES = "127.0.0.1:8000"

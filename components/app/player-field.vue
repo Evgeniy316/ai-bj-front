@@ -82,4 +82,15 @@ const isActiveHand = (index: number) => {
   padding: 8px;
   box-sizing: border-box;
 }
+
+@media (max-width: 768px) {
+  .player-field {
+    flex-direction: column;
+  }
+  
+  .left-section {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
 </style>
