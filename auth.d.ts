@@ -10,6 +10,7 @@ declare module '#auth-utils' {
     round_over: boolean,
     results: RoundResult[] | null,
     suggestion: string,
+    strategy: string,
     player_totals: number[],
     current_hand_idx: number | null,
     dealer_total: number | null,

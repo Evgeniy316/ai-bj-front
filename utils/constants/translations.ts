@@ -11,8 +11,10 @@ export const UI_TRANSLATIONS = {
   RESULT: "Результат",
   RESULTS: "Результаты",
   CONTINUE: "Продолжить",
-  SUGGESTION: "Рекомендация:", 
+  SUGGESTION: "Рекомендация ии:",
+  STRATEGY: "Стратегия:", 
   TOTAL_SCORE: "Сумма",
+  SUGGESTIONS: "Подсказки",
 } as const
 
 export const ACTION_TRANSLATIONS = {

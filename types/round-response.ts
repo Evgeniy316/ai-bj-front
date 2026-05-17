@@ -20,6 +20,7 @@ export interface RoundState {
   split_in_progress: boolean
   valid_actions: ActionType[]
   suggestion: string | null
+  strategy: string | null,
   round_over: boolean
   results: RoundResult[] | null
 }
