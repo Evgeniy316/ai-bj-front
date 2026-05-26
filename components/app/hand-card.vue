@@ -8,7 +8,7 @@ const props = defineProps<{
 }>();
 
 const hasMoreThanFourCards = computed(() => {
-  return props.cards && props.cards.length > 2;
+  return props.cards && props.cards.length > 3;
 });
 </script>
 
@@ -41,9 +41,9 @@ const hasMoreThanFourCards = computed(() => {
 }
 
 .hand-card.active-hand {
-  border: 2px solid #4CAF50;
+  border: 3px solid #ffffff;
   border-radius: 8px;
-  background-color: #f0f8f0;
+  background-color: rgb(208, 112, 23);
 }
 
 .card {
@@ -51,7 +51,7 @@ const hasMoreThanFourCards = computed(() => {
 }
 
 .card + .card {
-  margin-left: -50px;
+  margin-left: -45px;
   z-index: 1;
 }
 
@@ -60,7 +60,7 @@ const hasMoreThanFourCards = computed(() => {
   flex-direction: row;
   overflow-x: scroll; /* Always scroll, not auto - this reserves scrollbar space */
   overflow-y: hidden;
-  max-width: 140px; /* Fixed width for 2 cards: 80px (first card) + 30px (second card visible part) = 110px */
+  max-width: 150px; /* Fixed width for 2 cards: 80px (first card) + 30px (second card visible part) = 110px */
   padding-bottom: 12px; /* Always reserve space for scrollbar */
   scroll-behavior: smooth;
 }

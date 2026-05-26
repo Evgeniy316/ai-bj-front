@@ -9,8 +9,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: black;
-  border: 3px solid purple;
+  background-color: rgb(208, 112, 23);
+  border: 3px solid black;
   border-radius: 12px;
   padding: 16px;
   width: 85px;

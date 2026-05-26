@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 const createSession = inject('createSessionKey', ref(false)) 
 function startGame() {
+  console.log("Pressed")
   createSession.value = true 
 }
 </script>

@@ -85,7 +85,7 @@ const handleContinue = () => {
 }
 
 .modal-content {
-  background: white;
+  background: rgb(71, 93, 100);
   padding: 2rem;
   box-shadow: -4px 0 6px rgba(0, 0, 0, 0.1);
   text-align: center;
@@ -99,6 +99,7 @@ const handleContinue = () => {
   transform: translateX(100%);
   animation: slideIn 0.4s ease forwards;
   pointer-events: auto;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 @keyframes slideIn {
@@ -119,33 +120,35 @@ const handleContinue = () => {
 
 .modal-content h2 {
   margin-bottom: 1.5rem;
-  color: #333;
+  color: white;
 }
 
 .results-text {
   font-size: 1.2rem;
   font-weight: 600;
-  color: #4CAF50;
+  color: white;
   margin-bottom: 1.5rem;
   text-transform: capitalize;
+  
 }
 
 .action-button {
   padding: 0.75rem 2rem;
   font-size: 1rem;
-  background-color: #4CAF50;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  background-color: black;
   color: white;
-  border: none;
+  border: 2px solid white;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
 .action-button:hover {
-  background-color: #45a049;
+  background-color: rgb(208, 112, 23);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
   .modal-overlay {
     justify-content: center;
     align-items: flex-end;

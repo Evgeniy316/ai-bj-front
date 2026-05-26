@@ -40,7 +40,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="suggestions-card" @click="toggleSuggestions">
+  <div class="suggestions-card" :class="isExpanded ? 'suggestions-card-expanded' : 'suggestions-card-collapsed' " @click="toggleSuggestions">
     <div v-if="!isExpanded" class="suggestions-collapsed">
       <span class="suggestions-title">{{ UI_TRANSLATIONS.SUGGESTIONS }}</span>
     </div>
@@ -63,17 +63,31 @@ onMounted(async () => {
   border: 2px solid #333;
   border-radius: 8px;
   margin: 8px;
-  background-color: #f9f9f9;
+  /* background-color: rgb(208, 112, 23); */
   cursor: pointer;
   transition: background-color 0.2s;
   min-height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.3s ease;
+  width: 30%;
+  min-width: 250px;
+  align-self: left;
+}
+.suggestions-card-collapsed{
+  background-color: rgb(208, 112, 23); 
+  color: white;
+}
+.suggestions-card-expanded{
+  background-color: white;
+  color: black;
 }
 
+
 .suggestions-card:hover {
-  background-color: #efefef;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2)
 }
 
 .suggestions-collapsed {
@@ -86,11 +100,12 @@ onMounted(async () => {
 .suggestions-title {
   font-weight: bold;
   font-size: 18px;
-  color: #333;
+  /* color: #333; */
 }
 
 .suggestions-expanded {
   display: flex;
+  /* background-color: white; */
   flex-direction: column;
   gap: 8px;
   width: 100%;
@@ -104,10 +119,10 @@ onMounted(async () => {
 
 .suggestion-label {
   font-weight: bold;
-  color: #333;
+  color: black;
 }
 
 .suggestion-text {
-  color: #555;
+  color: black;
 }
 </style>

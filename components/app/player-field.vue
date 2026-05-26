@@ -57,7 +57,7 @@ const isActiveHand = (index: number) => {
   padding: 16px;
   border: 2px solid #444;
   border-radius: 8px;
-  background-color: #f9f9f9;
+  /* background-color: #f9f9f9; */
   box-sizing: border-box;
 }
 
@@ -83,7 +83,7 @@ const isActiveHand = (index: number) => {
   box-sizing: border-box;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
   .player-field {
     flex-direction: column;
   }
