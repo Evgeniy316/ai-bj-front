@@ -29,7 +29,7 @@ const isActionDisabled = (action: ActionType) => {
   padding: 12px;
   border: 2px solid #555;
   border-radius: 8px;
-  background-color: #f5f5f5;
+  background-color: white;
   height: 100%;
   width: 100%;
   box-sizing: border-box;

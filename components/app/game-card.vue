@@ -20,7 +20,7 @@
 
 .upper-section {
   flex: 2;
-  border: 2px solid #333;
+  /* border: 2px solid #333; */
   box-sizing: border-box;
 }
 

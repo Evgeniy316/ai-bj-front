@@ -10,7 +10,7 @@
   flex-direction: column;
   height: 100%;
   width: 100%;
-  border: 2px solid #333;
+  /* border: 2px solid #333; */
   padding: 8px;
   box-sizing: border-box;
 }

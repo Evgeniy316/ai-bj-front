@@ -73,7 +73,7 @@ const showFaceDownCard = computed(() => {
   justify-content: left;
   align-items: flex-start;
   padding: 16px;
-  border: 2px solid #444;
+  /* border: 2px solid #444; */
   border-radius: 8px;
   /* background-color: #f9f9f9; */
   box-sizing: border-box;

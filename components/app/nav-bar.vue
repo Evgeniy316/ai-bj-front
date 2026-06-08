@@ -14,7 +14,7 @@
 
 <template>
     <div class="nav">
-        <h3>{{pageTitle}}</h3>
+        <!-- <h3>{{pageTitle}}</h3> -->
     </div>
 </template>
 

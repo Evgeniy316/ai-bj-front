@@ -8,8 +8,8 @@ function startGame() {
 
 <template>
   <div class="greeting-card">
-    <p class="greeting-text">Welcome!</p>
-    <button @click="startGame" class="start-button">Start</button>
+    <p class="greeting-text">Добро пожаловать</p>
+    <button @click="startGame" class="start-button">Играть</button>
   </div>
 </template>
 
